@@ -14,7 +14,7 @@ while True:
     f = open(filename[1:])
     outputdata = f.read()
     
-    httpMsg = 'HTTP/1.1 200 OK dude'
+    httpMsg = 'HTTP/1.1 200 OK'
     connectionSocket.send(httpMsg)
     
     for i in range(0, len(outputdata)):
