@@ -1,7 +1,7 @@
 import socket
 
 target_host = "127.0.0.1"
-target_port = 80
+target_port = 12000
 
 # create a socket object
 # SOCK_DGRAM means UDP

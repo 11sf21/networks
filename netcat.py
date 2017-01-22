@@ -28,8 +28,49 @@ def usage():
     print "netcat.py -t 192.168.0.1 -p 5555 -u=c:\\target.exe"
     print "netcat.py -t 192.168.0.1 -p 5555 -l -e=\"cat /etc/passwd\""
     print "echo 'ABCDEFGHI' | ./netcat -t 192.168.11.12 -p 135"
-
     sys.exit(0)
+
+def client_sender(buffer):
+    client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+    try:
+        # connect to our target host
+        client.connect((target,port))
+
+        if len(buffer):
+            client.send(buffer)
+
+        while recv_len:
+            # now wait for data back
+            recv_len = len(data)
+            response += data
+
+            if recv_len < 4096:
+                break
+
+        print response
+
+        # wait for more input
+        buffer = raw input("")
+        buffer += "/n"
+
+        # send it off
+        client.send(buffer)
+
+    except:
+        print "[*] Exception! Exiting."
+
+        # tear down the connection
+        client.close()
+
+def server_loop():
+    global target
+
+    # if no target is defined, we listen on all interfaces
+    if not len(target):
+        target = "0.0.0.0"
+
+        server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 def main():
     global listen

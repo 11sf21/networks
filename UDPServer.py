@@ -9,4 +9,6 @@ print "The server is ready to receive"
 while True:
   message, clientAddress = serverSocket.recvfrom(2048)
   modifiedMessage = message.upper()
+  print "Msg from %s:%d" % (clientAddress[0],clientAddress[1])
+  print message
   serverSocket.sendto(modifiedMessage, clientAddress)
